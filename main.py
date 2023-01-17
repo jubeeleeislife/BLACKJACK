@@ -32,6 +32,8 @@ hit_button_clicked = False
 j = 1
 i = 1
 
+flag_p1 = False
+
 running = True
 while running:
     for event in pygame.event.get():
@@ -113,11 +115,14 @@ while running:
         if hit_rect.collidepoint(mouse_pos):
             hit_button_clicked = not hit_button_clicked
             if hit_button_clicked:
-
-                when_hit_secondcard = pygame.image.load(f"{player[1]}.png")
-                when_hit_secondcard = pygame.transform.scale(when_hit_secondcard,(176,200))
-                screen.blit(when_hit_secondcard,(450,410))
-                mouse_state[0] == 0
+                
+                flag_p1 = True
+    
+    if flag_p1:
+        when_hit_secondcard = pygame.image.load(f"{player[1]}.png")
+        when_hit_secondcard = pygame.transform.scale(when_hit_secondcard,(176,200))
+        screen.blit(when_hit_secondcard,(450,410))
+        mouse_state[0] == 0
     
                 
 
