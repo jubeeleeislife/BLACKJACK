@@ -148,3 +148,8 @@ while running:
     #screen.blit(stand_text,(400,650))
     screen.blit(hit_text_surface, hit_rect)
     screen.blit(stand_text_surface, stand_rect)
+    
+    
+    pygame.display.update()
+
+
