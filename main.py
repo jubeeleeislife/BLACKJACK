@@ -28,11 +28,14 @@ for card in suits:
 
 hit_button_clicked = False
 #Dealers cards 
-
+hit1 = False
+hit2 = False
+h_count = 0
+u = 1
 j = 1
 i = 1
-
-flag_p1 = False
+h = 1
+hit_button_clicked = False
 
 running = True
 while running:
@@ -103,53 +106,136 @@ while running:
     stand_text_surface = my_font.render(stand_text, True, (8, 8, 8))
     stand_rect = stand_text_surface.get_rect()
     stand_rect.center = (400, 650)
+    keys = pygame.key.get_pressed()
+
+
+
+    if keys[pygame.K_h]:
+        hit1 = True
+    if hit1:
+        if h == 1:
+
+
+            y3 = random.choice(first_deck)
+            first_deck.remove(y3)
+            player.append(y3)
+            image3 = pygame.image.load(f"{player[2]}.png")
+            image3 = pygame.transform.scale(image3,(176,200))
+            h = h + 1
+            h_count = 1
+            
+
+        
+        
+
+        screen.blit(image3,(450,410))
+
+    if keys[pygame.K_SPACE]:
+        hit2 = True
+    elif hit2:
+        if u == 1 and h > 1:
+            
+
+
+
+            y4 = random.choice(first_deck)
+            first_deck.remove(y4)
+            player.append(y4)
+            image4 = pygame.image.load(f"{player[3]}.png")
+            image4 = pygame.transform.scale(image4,(176,200))
+            u = u + 1
+        screen.blit(image4,(650,410))
+
+
+
     
-    mouse_state = pygame.mouse.get_pressed()
+    
+        
 
-    # Check if the left mouse button is pressed
-    if mouse_state[0] == 1:
-        # Get the current mouse position
-        mouse_pos = pygame.mouse.get_pos()
-
-        # Check if the HIT button is clicked
-        if hit_rect.collidepoint(mouse_pos):
-            hit_button_clicked = not hit_button_clicked
-            if hit_button_clicked:
+    
+    
                 
-                flag_p1 = True
-    
-    if flag_p1:
-        when_hit_secondcard = pygame.image.load(f"{player[1]}.png")
-        when_hit_secondcard = pygame.transform.scale(when_hit_secondcard,(176,200))
-        screen.blit(when_hit_secondcard,(450,410))
-        mouse_state[0] == 0
-    
-                
-
-
-
-
-        """if hit_rect.collidepoint(mouse_pos):
-            when_hit_secondcard = pygame.image.load(f"{player[1]}.png")
-            when_hit_secondcard = pygame.transform.scale(when_hit_secondcard,(176,200))
-            screen.blit(when_hit_secondcard,(750,410))"""
-
-
-        # Check if the STAND button is clicked
-        if stand_rect.collidepoint(mouse_pos):
-            print("STAND button clicked!")
-
-
-
-
 
 
     #screen.blit(hit_text,(50,650)) 
     #screen.blit(stand_text,(400,650))
     screen.blit(hit_text_surface, hit_rect)
     screen.blit(stand_text_surface, stand_rect)
+
+
+    """if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            mouse_pos = pygame.mouse.get_pos()
+            if hit_rect.collidepoint(mouse_pos):
+                print("HIT button clicked!")
+    if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            mouse_pos = pygame.mouse.get_pos()
+            if stand_rect.collidepoint(mouse_pos):
+                print("STAND button clicked!")"""
+
+
+
+
+
+
+
+
+
+
+
+    """hit = my_font.render("HIT",True,(8,8,8))
+    stand = my_font.render("STAND",True,(8,8,8))
+    screen.blit(hit,(50,650)) 
+    screen.blit(stand,(400,650))
+
+    textrect1 = hit.get_rect()
+    textrect2 = stand.get_rect()
+    textrect1.center = (50,650)
+    textrect2.center = (400,650)
+    mouse_pos = pygame.mouse.get_pos()
+    print(mouse_pos)
+
+    if textrect1.collidepoint(mouse_pos):
+        text = my_font.render("HIT", True, (38, 255, 0))"""
+
+    #score calculation
+    count = 2
+    tot = 0
+    for card in player:
+        if card[0] in ["J","K","Q"]:
+            tot = tot + 10
+        elif card[0] in ["2","3","4","5","6","7","8","9"]:
+            tot = tot + int(card[0])
+        elif card[0] == "1":
+            if card[1] == "0":
+                tot = tot + 10
+            else:
+                tot = tot + 1       
+        else:
+            tot = tot + 11
+    print(tot)
+    if count == 2:
+        if tot == 21:
+            wintxt = my_font.render("YOU WIN!!! ", True, (255, 250, 250))
+            screen.blit(wintxt,(400,350))
+    if tot > 21:
+        losstxt = my_font.render("YOU HAVE EXCEEDED THE VALUE OF 21 AND GONE BUST",True,(255,250,250))
+        screen.blit(losstxt,(200,350))
+
+
+
+    #screen.blit(image,(50,50))
     
-    
+    #text = my_font.render("Dealer's Cards : ", True, (8, 8, 8))
+    #screen.blit(text,(50,10))
+
     pygame.display.update()
+
+
+
+
+
+
+
+
 
 
