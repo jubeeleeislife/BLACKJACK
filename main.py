@@ -20,22 +20,24 @@ first_deck = []
 value = ["Ace","2","3","4","5","6","7","8","9","10","J","Q","K"]
 suits = ["Spades","Hearts","Diamonds","Clubs"]
 
-for card in suits:
+for dls in suits:
     for card1 in value:
 
 
-         first_deck.append(card1 + " of " + card)
+         first_deck.append(card1 + " of " + dls)
 
 hit_button_clicked = False
 #Dealers cards 
 hit1 = False
 hit2 = False
+hit3 = False
 h_count = 0
 u = 1
 j = 1
 i = 1
 h = 1
 hit_button_clicked = False
+sumdealer = 0
 
 running = True
 while running:
@@ -57,6 +59,7 @@ while running:
         first_deck.remove(x2)
         dealer.append(x2)
         i = i + 1
+    print("DEALERS CARDS :",dealer)
 
 
     text = my_font.render("Dealer's Cards : ", True, (255, 250, 250))
@@ -186,27 +189,25 @@ while running:
     stand = my_font.render("STAND",True,(8,8,8))
     screen.blit(hit,(50,650)) 
     screen.blit(stand,(400,650))
-
     textrect1 = hit.get_rect()
     textrect2 = stand.get_rect()
     textrect1.center = (50,650)
     textrect2.center = (400,650)
     mouse_pos = pygame.mouse.get_pos()
     print(mouse_pos)
-
     if textrect1.collidepoint(mouse_pos):
         text = my_font.render("HIT", True, (38, 255, 0))"""
 
     #score calculation
     count = 2
     tot = 0
-    for card in player:
-        if card[0] in ["J","K","Q"]:
+    for dls in player:
+        if dls[0] in ["J","K","Q"]:
             tot = tot + 10
-        elif card[0] in ["2","3","4","5","6","7","8","9"]:
-            tot = tot + int(card[0])
-        elif card[0] == "1":
-            if card[1] == "0":
+        elif dls[0] in ["2","3","4","5","6","7","8","9"]:
+            tot = tot + int(dls[0])
+        elif dls[0] == "1":
+            if dls[1] == "0":
                 tot = tot + 10
             else:
                 tot = tot + 1       
@@ -218,8 +219,45 @@ while running:
             wintxt = my_font.render("YOU WIN!!! ", True, (255, 250, 250))
             screen.blit(wintxt,(400,350))
     if tot > 21:
+        screen.fill((0,0,255))
         losstxt = my_font.render("YOU HAVE EXCEEDED THE VALUE OF 21 AND GONE BUST",True,(255,250,250))
-        screen.blit(losstxt,(200,350))
+        screen.blit(losstxt,(50,350))
+    if keys[pygame.K_s]:
+        hit3 = True
+    elif hit3:
+        for dls in dealer:
+            print(dls[0])
+            if dls[0] in ["J","K","Q"]:
+                sumdealer = tot + 10
+            elif dls[0] in ["2","3","4","5","6","7","8","9"]:
+                sumdealer = tot + int(dls[0])
+            elif dls[0] == "1":
+                if dls[1] == "0":
+                    sumdealer = tot + 10
+                else:
+                    sumdealer = tot + 1       
+        else:
+            sumdealer = tot + 11
+        
+
+            if sumdealer > tot:
+                screen.fill((0,0,255))
+                wintxt1 = my_font.render("YOU LOSE",True,(255,250,250))
+            elif sumdealer > 21:
+                screen.fill((0,153,25))
+                wintxt2 = my_font.render("YOU WIN",True,(255,250,250))
+            elif tot > sumdealer:
+                wintxt3 = my_font.render("YOU WIN",True,(255,250,250))
+                screen.fill((0,153,25))
+                
+            else:
+                screen.fill((153,187,255))
+                wintxt4 = my_font.render("YOU WIN",True,(255,250,250))
+
+    print("SUMDEALER MONI : ",sumdealer)
+            
+            
+
 
 
 
@@ -229,6 +267,22 @@ while running:
     #screen.blit(text,(50,10))
 
     pygame.display.update()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
