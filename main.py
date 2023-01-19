@@ -27,6 +27,7 @@ for dls in suits:
          first_deck.append(card1 + " of " + dls)
 
 hit_button_clicked = False
+checkdeal = 1
 #Dealers cards 
 hit1 = False
 hit2 = False
@@ -226,18 +227,20 @@ while running:
         hit3 = True
     elif hit3:
         for dls in dealer:
-            print(dls[0])
-            if dls[0] in ["J","K","Q"]:
-                sumdealer = tot + 10
-            elif dls[0] in ["2","3","4","5","6","7","8","9"]:
-                sumdealer = tot + int(dls[0])
-            elif dls[0] == "1":
-                if dls[1] == "0":
-                    sumdealer = tot + 10
+            if checkdeal <= 2:
+                print(dls[0])
+                if dls[0] in ["J","K","Q"]:
+                    sumdealer = sumdealer + 10
+                elif dls[0] in ["2","3","4","5","6","7","8","9"]:
+                    sumdealer = sumdealer + int(dls[0])
+                elif dls[0] == "1":
+                    if dls[1] == "0":
+                        sumdealer = sumdealer + 10
+                    else:
+                        sumdealer = sumdealer + 1       
                 else:
-                    sumdealer = tot + 1       
-        else:
-            sumdealer = tot + 11
+                    sumdealer = sumdealer + 11
+            checkdeal = checkdeal + 1
         
 
             if sumdealer > tot:
@@ -267,16 +270,6 @@ while running:
     #screen.blit(text,(50,10))
 
     pygame.display.update()
-
-
-
-
-
-
-
-
-
-
 
 
 
