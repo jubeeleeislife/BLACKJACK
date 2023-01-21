@@ -219,7 +219,7 @@ while running:
                 dealerimage2 = pygame.image.load(f"{dealer[1]}.png")
                 dealerimage2 = pygame.transform.scale(dealerimage2,(176,200))
                 screen.blit(dealerimage2,(280,70))
-                losstxt1 = my_font.render("YOU LOSE",True,(255,250,250))
+                losstxt1 = my_font.render("YOU LOSE D:",True,(255,250,250))
 
 
                 screen.blit(losstxt1,(500,350))
@@ -229,7 +229,7 @@ while running:
                 dealerimage2 = pygame.transform.scale(dealerimage2,(176,200))
                 screen.blit(dealerimage2,(280,70))
 
-                wintxt2 = my_font.render("YOU WIN",True,(255,250,250))
+                wintxt2 = my_font.render("YOU WIN!! :D",True,(255,250,250))
 
 
                 screen.blit(wintxt2,(500,350))
@@ -237,7 +237,7 @@ while running:
                 dealerimage2 = pygame.image.load(f"{dealer[1]}.png")
                 dealerimage2 = pygame.transform.scale(dealerimage2,(176,200))
                 screen.blit(dealerimage2,(280,70))
-                wintxt3 = my_font.render("YOU WIN",True,(255,250,250))
+                wintxt3 = my_font.render("YOU WIN!! :D ",True,(255,250,250))
 
 
                 screen.blit(wintxt3,(500,350))
@@ -248,7 +248,7 @@ while running:
                 dealerimage2 = pygame.transform.scale(dealerimage2,(176,200))
                 screen.blit(dealerimage2,(280,70))
                 #screen.fill((153,187,255))
-                wintxt4 = my_font.render("YOU WIN",True,(255,250,250))
+                wintxt4 = my_font.render("IT'S A TIE :|",True,(255,250,250))
 
 
                 screen.blit(wintxt4,(500,350))
@@ -260,24 +260,6 @@ while running:
     #screen.blit(text,(50,10))
 
     pygame.display.update()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
