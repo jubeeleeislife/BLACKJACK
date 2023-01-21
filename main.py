@@ -8,7 +8,7 @@ pygame.init()
 screen = pygame.display.set_mode((900, 750))
 pygame.display.set_caption("BLACKJACK")
 
-my_font = pygame.font.SysFont('Comic Sans MS', 30)
+my_font = pygame.font.SysFont('freesansbold', 30)
 
 
 #Main part
@@ -26,7 +26,7 @@ for dls in suits:
 
          first_deck.append(card1 + " of " + dls)
 
-hit_button_clicked = False
+
 checkdeal = 1
 #Dealers cards 
 hit1 = False
@@ -37,7 +37,7 @@ u = 1
 j = 1
 i = 1
 h = 1
-hit_button_clicked = False
+
 sumdealer = 0
 
 running = True
@@ -45,7 +45,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    screen.fill((107,5,7))
+    screen.fill((13,12,12))
 
 
 
@@ -60,7 +60,7 @@ while running:
         first_deck.remove(x2)
         dealer.append(x2)
         i = i + 1
-    print("DEALERS CARDS :",dealer)
+
 
 
     text = my_font.render("Dealer's Cards : ", True, (255, 250, 250))
@@ -71,8 +71,8 @@ while running:
     image = pygame.transform.scale(image, (176, 200)) #size of image
     screen.blit(image,(50,70))
 
-    text = my_font.render("X", True, (8, 8, 8))
-    screen.blit(text,(400,50))
+    text = my_font.render("X", True, (255, 250, 250))
+    screen.blit(text,(350,70))
 
     #Player's Cards
 
@@ -97,17 +97,20 @@ while running:
     image2 = pygame.image.load(f"{player[1]}.png")
     image2 = pygame.transform.scale(image2,(176,200))
     screen.blit(image2,(250,410))
-    hit_button_clicked = False
+    
     #hitandstandbutton
     hit_text = "HIT"
+    hitimage = pygame.image.load("HIT.png")
+    #hitimage = pygame.transform.scale(hitimage,(100,150))
+    #screen.blit(hitimage,(50,650))
     
-    hit_text_surface = my_font.render(hit_text, True, (8, 8, 8))
+    hit_text_surface = my_font.render(hit_text, True, (250, 255, 255))
     hit_rect = hit_text_surface.get_rect()
     hit_rect.center = (50, 650)
 
     stand_text = "STAND"
     
-    stand_text_surface = my_font.render(stand_text, True, (8, 8, 8))
+    stand_text_surface = my_font.render(stand_text, True, (250, 255, 255))
     stand_rect = stand_text_surface.get_rect()
     stand_rect.center = (400, 650)
     keys = pygame.key.get_pressed()
@@ -151,16 +154,6 @@ while running:
         screen.blit(image4,(650,410))
 
 
-
-    
-    
-        
-
-    
-    
-                
-
-
     #screen.blit(hit_text,(50,650)) 
     #screen.blit(stand_text,(400,650))
     screen.blit(hit_text_surface, hit_rect)
@@ -179,26 +172,6 @@ while running:
 
 
 
-
-
-
-
-
-
-
-    """hit = my_font.render("HIT",True,(8,8,8))
-    stand = my_font.render("STAND",True,(8,8,8))
-    screen.blit(hit,(50,650)) 
-    screen.blit(stand,(400,650))
-    textrect1 = hit.get_rect()
-    textrect2 = stand.get_rect()
-    textrect1.center = (50,650)
-    textrect2.center = (400,650)
-    mouse_pos = pygame.mouse.get_pos()
-    print(mouse_pos)
-    if textrect1.collidepoint(mouse_pos):
-        text = my_font.render("HIT", True, (38, 255, 0))"""
-
     #score calculation
     count = 2
     tot = 0
@@ -214,7 +187,6 @@ while running:
                 tot = tot + 1       
         else:
             tot = tot + 11
-    print(tot)
     if count == 2:
         if tot == 21:
             wintxt = my_font.render("YOU WIN!!! ", True, (255, 250, 250))
@@ -228,7 +200,6 @@ while running:
     elif hit3:
         for dls in dealer:
             if checkdeal <= 2:
-                print(dls[0])
                 if dls[0] in ["J","K","Q"]:
                     sumdealer = sumdealer + 10
                 elif dls[0] in ["2","3","4","5","6","7","8","9"]:
@@ -244,24 +215,43 @@ while running:
         
 
             if sumdealer > tot:
-                screen.fill((0,0,255))
-                wintxt1 = my_font.render("YOU LOSE",True,(255,250,250))
+                #screen.fill((0,0,255))
+                dealerimage2 = pygame.image.load(f"{dealer[1]}.png")
+                dealerimage2 = pygame.transform.scale(dealerimage2,(176,200))
+                screen.blit(dealerimage2,(280,70))
+                losstxt1 = my_font.render("YOU LOSE",True,(255,250,250))
+
+
+                screen.blit(losstxt1,(500,350))
             elif sumdealer > 21:
-                screen.fill((0,153,25))
+                #screen.fill((0,153,25))
+                dealerimage2 = pygame.image.load(f"{dealer[1]}.png")
+                dealerimage2 = pygame.transform.scale(dealerimage2,(176,200))
+                screen.blit(dealerimage2,(280,70))
+
                 wintxt2 = my_font.render("YOU WIN",True,(255,250,250))
+
+
+                screen.blit(wintxt2,(500,350))
             elif tot > sumdealer:
+                dealerimage2 = pygame.image.load(f"{dealer[1]}.png")
+                dealerimage2 = pygame.transform.scale(dealerimage2,(176,200))
+                screen.blit(dealerimage2,(280,70))
                 wintxt3 = my_font.render("YOU WIN",True,(255,250,250))
-                screen.fill((0,153,25))
+
+
+                screen.blit(wintxt3,(500,350))
+                #screen.fill((0,153,25))
                 
             else:
-                screen.fill((153,187,255))
+                dealerimage2 = pygame.image.load(f"{dealer[1]}.png")
+                dealerimage2 = pygame.transform.scale(dealerimage2,(176,200))
+                screen.blit(dealerimage2,(280,70))
+                #screen.fill((153,187,255))
                 wintxt4 = my_font.render("YOU WIN",True,(255,250,250))
 
-    print("SUMDEALER MONI : ",sumdealer)
-            
-            
 
-
+                screen.blit(wintxt4,(500,350))
 
 
     #screen.blit(image,(50,50))
@@ -270,6 +260,23 @@ while running:
     #screen.blit(text,(50,10))
 
     pygame.display.update()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
